@@ -1,0 +1,129 @@
+.lyrics-input-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.lyrics-input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.lyrics-input-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.lyrics-input-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.lyrics-textarea {
+  width: 100%;
+  min-height: 240px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.8;
+  resize: vertical;
+  color: #222;
+}
+
+.lyrics-textarea:focus {
+  outline: 2px solid #0055aa;
+  outline-offset: -1px;
+}
+
+/* セクションラベル挿入パネル */
+.label-insert-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  background: #f5f7ff;
+  border: 1px solid #dce3f5;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.label-insert-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #666;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.label-preset-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+}
+
+.label-preset-btn {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  border: 1px solid #aac;
+  border-radius: 4px;
+  background: #fff;
+  color: #334;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+
+.label-preset-btn:hover {
+  background: #0055aa;
+  color: #fff;
+  border-color: #0055aa;
+}
+
+.label-custom-group {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.label-custom-input {
+  padding: 3px 8px;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100px;
+}
+
+.label-custom-input:focus {
+  outline: 2px solid #0055aa;
+  outline-offset: -1px;
+}
+
+.label-custom-btn {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  background: #0055aa;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.label-custom-btn:disabled {
+  background: #aaa;
+  cursor: default;
+}
+
+.lyrics-hint {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #999;
+}

@@ -1,0 +1,105 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 2px solid #0055aa;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.header-title-area {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.app-logo {
+  font-size: 1.4rem;
+  color: #0055aa;
+}
+
+.app-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0055aa;
+  white-space: nowrap;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.title-input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 180px;
+}
+
+.title-input:focus {
+  outline: 2px solid #0055aa;
+  outline-offset: -1px;
+}
+
+select {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #fff;
+}
+
+button {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+
+button:hover {
+  background: #f0f0f0;
+}
+
+.btn-primary {
+  background: #0055aa;
+  color: #fff;
+  border-color: #0055aa;
+}
+
+.btn-primary:hover {
+  background: #003d80;
+}
+
+.control-group-actions {
+  gap: 6px;
+}
+
+/* 印刷時は非表示 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

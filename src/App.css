@@ -1,0 +1,86 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cell-w: 2em;
+  --chord-h: 1.8em;
+}
+
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', 'Yu Gothic', sans-serif;
+  font-size: 16px;
+  background: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px 60px;
+}
+
+/* ===== コード譜セクション ===== */
+.score-section {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.score-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.score-hint {
+  font-size: 0.78rem;
+  color: #999;
+}
+
+.score-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* ===== 共有ボタンスタイル（上書き用） ===== */
+button {
+  font-family: inherit;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .app-container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .app-header {
+    display: none !important;
+  }
+
+  .score-section {
+    border: none;
+    padding: 0;
+  }
+
+  .score-title {
+    font-size: 16pt;
+    margin-bottom: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

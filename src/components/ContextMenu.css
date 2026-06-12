@@ -1,0 +1,107 @@
+.ctx-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.ctx-menu {
+  position: fixed;
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  padding: 8px;
+  min-width: 280px;
+  max-width: 380px;
+  font-family: inherit;
+}
+
+.ctx-section {
+  margin-bottom: 8px;
+}
+
+.ctx-section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 4px;
+  margin-bottom: 4px;
+}
+
+.ctx-chord-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 2px;
+}
+
+.ctx-chord-btn {
+  padding: 4px 10px;
+  border: 1px solid #0055aa;
+  border-radius: 4px;
+  background: #fff;
+  color: #0055aa;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.ctx-chord-btn:hover {
+  background: #0055aa;
+  color: #fff;
+}
+
+.ctx-custom {
+  display: flex;
+  gap: 4px;
+  padding: 0 2px;
+}
+
+.ctx-custom input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+}
+
+.ctx-custom input:focus {
+  outline: 2px solid #0055aa;
+  outline-offset: -1px;
+}
+
+.ctx-custom button {
+  padding: 4px 10px;
+  background: #0055aa;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.ctx-divider {
+  border-top: 1px solid #eee;
+  margin: 6px 0;
+}
+
+.ctx-clear-btn {
+  width: 100%;
+  padding: 5px;
+  background: #fff5f5;
+  border: 1px solid #ffaaaa;
+  border-radius: 4px;
+  color: #cc3333;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.ctx-clear-btn:hover {
+  background: #ffdddd;
+}

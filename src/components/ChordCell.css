@@ -1,0 +1,91 @@
+:root {
+  --cell-w: 2em;
+  --chord-h: 1.8em;
+  --cell-border: 1px solid #d0d0d0;
+  --chord-color: #0055aa;
+}
+
+.chord-cell {
+  position: relative;
+  width: var(--cell-w);
+  height: var(--chord-h);
+  border-right: var(--cell-border);
+  border-bottom: var(--cell-border);
+  background: #f8f8ff;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.chord-cell.selected {
+  background: #ddeeff;
+  z-index: 3;
+}
+
+.chord-cell.has-chord {
+  background: #eef3ff;
+}
+
+.chord-label {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--chord-color);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.chord-edit-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 2px;
+  border: 2px solid #0055aa;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  color: var(--chord-color);
+  z-index: 10;
+  min-width: 80px;
+}
+
+/* 末尾マスは薄い背景色で区別 */
+.chord-cell.trail {
+  background: #f4f4f4;
+}
+.chord-cell.trail.has-chord {
+  background: #eef3ff;
+}
+
+@media print {
+  /* 末尾マスにコードがない場合は非表示 */
+  .chord-cell.trail:not(.has-chord) {
+    display: none !important;
+  }
+
+  .chord-cell {
+    width: var(--print-width, 16.8pt) !important;
+    height: auto !important;
+    min-height: 14.4pt !important;
+    border-color: transparent !important;
+    background: transparent !important;
+  }
+
+  .chord-label {
+    font-size: 9.4pt !important;
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    padding-bottom: 1pt !important;
+  }
+}
