@@ -59,6 +59,11 @@
   min-width: 80px;
 }
 
+/* スペースマスはボーダーを透明に（歌詞行のスペースと揃える） */
+.chord-cell.space {
+  border-right-color: transparent;
+}
+
 /* 末尾マスは薄い背景色で区別 */
 .chord-cell.trail {
   background: #f4f4f4;

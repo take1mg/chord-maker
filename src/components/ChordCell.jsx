@@ -1,10 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
 import './ChordCell.css';
 
-export default function ChordCell({ rowIndex, colIndex, chord, selected, trail, printWidth, screenWidth, onSelect, onContextMenu, onChange }) {
+const LONG_PRESS_MS = 500;
+
+export default function ChordCell({ rowIndex, colIndex, chord, selected, trail, space, printWidth, screenWidth, onSelect, onContextMenu, onChange }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState('');
   const inputRef = useRef(null);
+  const longPressTimer = useRef(null);
+  const longPressTriggered = useRef(false);
 
   useEffect(() => {
     if (editing && inputRef.current) {
@@ -29,6 +33,7 @@ export default function ChordCell({ rowIndex, colIndex, chord, selected, trail, 
   };
 
   const handleClick = (e) => {
+    if (longPressTriggered.current) return;
     onSelect(rowIndex, colIndex);
   };
 
@@ -40,6 +45,27 @@ export default function ChordCell({ rowIndex, colIndex, chord, selected, trail, 
     e.preventDefault();
     onSelect(rowIndex, colIndex);
     onContextMenu(e, rowIndex, colIndex);
+  };
+
+  const handlePointerDown = (e) => {
+    if (e.button !== 0) return; // 左ボタン or タッチのみ
+    longPressTriggered.current = false;
+    longPressTimer.current = setTimeout(() => {
+      longPressTriggered.current = true;
+      onSelect(rowIndex, colIndex);
+      onContextMenu(
+        { clientX: e.clientX, clientY: e.clientY, preventDefault: () => {} },
+        rowIndex,
+        colIndex
+      );
+    }, LONG_PRESS_MS);
+  };
+
+  const cancelLongPress = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -62,14 +88,18 @@ export default function ChordCell({ rowIndex, colIndex, chord, selected, trail, 
 
   return (
     <div
-      className={`chord-cell${selected ? ' selected' : ''}${chord ? ' has-chord' : ''}${trail ? ' trail' : ''}`}
-      style={{ '--print-width': printWidth, ...(screenWidth ? { width: screenWidth } : {}) }}
+      className={`chord-cell${selected ? ' selected' : ''}${chord ? ' has-chord' : ''}${trail ? ' trail' : ''}${space ? ' space' : ''}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       onContextMenu={handleContextMenu}
+      onPointerDown={handlePointerDown}
+      onPointerUp={cancelLongPress}
+      onPointerLeave={cancelLongPress}
+      onPointerCancel={cancelLongPress}
       onKeyDown={handleKeyDown}
       onKeyPress={handleKeyPress}
       tabIndex={0}
+      style={{ '--print-width': printWidth, ...(screenWidth ? { width: screenWidth } : {}), touchAction: 'none' }}
       data-row={rowIndex}
       data-col={colIndex}
     >

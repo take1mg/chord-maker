@@ -133,6 +133,7 @@ export default function ScoreGrid({ lines, chords, keyRoot, keyType, lyricsFontS
             chord={chord}
             selected={isSelected}
             trail={isTrail}
+            space={chunk.type === 'space'}
             printWidth={calcPrintWidth(chord, lyricsFontSize, chunk)}
             screenWidth={sw}
             onSelect={handleSelect}
