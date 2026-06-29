@@ -69,6 +69,42 @@
   letter-spacing: 0.05em;
 }
 
+.section-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.section-btn {
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border: 1px solid #aab;
+  border-radius: 3px;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.section-btn:hover {
+  background: #e8e8f4;
+}
+
+.section-btn-copied {
+  border-color: #0055aa;
+  color: #0055aa;
+}
+
+.section-btn-paste {
+  background: #0055aa;
+  color: #fff;
+  border-color: #0055aa;
+}
+
+.section-btn-paste:hover {
+  background: #0044aa;
+}
+
 @page {
   margin: 15mm 20mm;
   size: A4;

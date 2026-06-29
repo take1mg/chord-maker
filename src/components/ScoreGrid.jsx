@@ -74,6 +74,7 @@ function calcScreenWidth(chunk) {
 export default function ScoreGrid({ lines, chords, keyRoot, keyType, lyricsFontSize, onChordsChange }) {
   const [selectedCell, setSelectedCell] = useState(null);
   const [contextMenu, setContextMenu] = useState(null);
+  const [copiedSection, setCopiedSection] = useState(null);
 
   const chordKey = (row, col) => `${row}_${col}`;
 
@@ -109,6 +110,48 @@ export default function ScoreGrid({ lines, chords, keyRoot, keyType, lyricsFontS
     }
     setContextMenu(null);
   };
+
+  const getSectionAbsRows = useCallback((labelIndex) => {
+    const rows = [labelIndex];
+    for (let i = labelIndex + 1; i < lines.length; i++) {
+      if (isLabelLine(lines[i])) break;
+      rows.push(i);
+    }
+    return rows;
+  }, [lines]);
+
+  const handleCopySection = useCallback((labelIndex) => {
+    const absRows = getSectionAbsRows(labelIndex);
+    const relativeChords = {};
+    absRows.forEach((absRow, relRow) => {
+      Object.entries(chords).forEach(([key, chord]) => {
+        const [r, c] = key.split('_');
+        if (Number(r) === absRow) {
+          relativeChords[`${relRow}_${c}`] = chord;
+        }
+      });
+    });
+    setCopiedSection({ relativeChords, rowCount: absRows.length });
+  }, [lines, chords, getSectionAbsRows]);
+
+  const handlePasteSection = useCallback((labelIndex) => {
+    if (!copiedSection) return;
+    const absRows = getSectionAbsRows(labelIndex);
+    const next = { ...chords };
+    absRows.forEach((absRow) => {
+      Object.keys(next).forEach(k => {
+        if (k.startsWith(`${absRow}_`)) delete next[k];
+      });
+    });
+    Object.entries(copiedSection.relativeChords).forEach(([relKey, chord]) => {
+      const [relRowStr, colStr] = relKey.split('_');
+      const relRow = Number(relRowStr);
+      if (relRow < absRows.length) {
+        next[chordKey(absRows[relRow], Number(colStr))] = chord;
+      }
+    });
+    onChordsChange(next);
+  }, [copiedSection, chords, getSectionAbsRows, onChordsChange]);
 
   const handleGridClick = (e) => {
     if (!e.target.closest('.chord-cell')) {
@@ -160,7 +203,27 @@ export default function ScoreGrid({ lines, chords, keyRoot, keyType, lyricsFontS
           return (
             <div key={lineIndex} className="score-line-group">
               {renderChordRow(lineIndex, CHORD_ONLY_CELLS)}
-              <div className="label-row">{line}</div>
+              <div className="label-row">
+                <span>{line}</span>
+                <div className="section-actions no-print">
+                  <button
+                    className={`section-btn${copiedSection ? ' section-btn-copied' : ''}`}
+                    onClick={() => handleCopySection(lineIndex)}
+                    title="このセクションのコードをコピー"
+                  >
+                    コピー
+                  </button>
+                  {copiedSection && (
+                    <button
+                      className="section-btn section-btn-paste"
+                      onClick={() => handlePasteSection(lineIndex)}
+                      title="コピーしたコードをこのセクションに貼り付け"
+                    >
+                      ペースト
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           );
         }
